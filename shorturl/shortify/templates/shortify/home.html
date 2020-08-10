@@ -1,14 +1,43 @@
-<!DOCTYPE html>
-<html>
-<head>
-	<title>Home</title>
-</head>
-<body style="text-align: center">
-	<h1>UrlShortify</h1>
-	<form action="{% url 'home' %}" method="POST">
-		{% csrf_token %}
-		{{ form.longurl}}<br><br>
-		<input type="submit" value="Shorten">	
-	</form>
-</body>
-</html>
+{% extends 'base.html' %}
+{% block content %}
+	<nav class="navbar navbar-expand-sm bg-dark navbar-dark">
+	  <!-- Brand/logo -->
+	  <a class="navbar-brand" href="{% url 'home' %}">UrlShortify</a>
+	  <!-- Links -->
+	  <ul class="navbar-nav ml-auto">
+	      {% if user.is_authenticated %}
+	      	<li class="nav-item">
+	      		<strong class="nav-link">{{user.username}}</strong>
+	      	</li>
+	      {% endif %}
+	      {% if user.is_authenticated %}
+	      	<li class="nav-item">
+	      	<a class="nav-link" href="{% url 'my_account' %}">Urls List</a>
+	      	</li>
+	        {% endif %}
+	      {% if not user.is_authenticated %}
+		    <li class="nav-item">
+		      <a class="nav-link" href="{% url 'login' %}">Log in</a>
+		    </li>
+		    <li class="nav-item">
+		      <a class="nav-link" href="{% url 'register' %}">Sign up</a>
+		    </li>
+	        {% endif %}
+	      {% if user.is_authenticated %}
+		    <li class="nav-item">
+		      <a class="nav-link" href="{% url 'logout' %}">Log out</a>
+		    </li>
+		  {% endif %}
+	    </ul>
+	</nav>
+	<div id = "mid">
+		<div class="d-flex justify-content-center">
+		 <form class="form-inline" action="{% url 'home' %}" method="POST">
+			 	{% csrf_token %}
+			<input class="form-control mr-sm-2" placeholder="Past Your Long Url Here" type={{form.longurl}}       
+			<input class="btn btn-primary input-lg" type="submit" value="Shorten">
+		  </form>
+       </div>
+    </div>
+	
+{% endblock content %}

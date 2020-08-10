@@ -1,3 +1,4 @@
+from django.contrib.auth.models import User
 from django.db import models
 import random
 import string
@@ -32,3 +33,9 @@ def shorturl_check():
 	return new_url
 
 
+class User_account(models.Model):
+	user = models.OneToOneField(User,on_delete = models.CASCADE)
+	url =models.ManyToManyField(Urltab, related_name = "user_url")
+	
+	def __str__(self):
+		return f"user -- {self.user}"

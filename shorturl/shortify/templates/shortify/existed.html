@@ -1,2 +1,21 @@
-{{obj.longurl}}
-{{obj.shorturl}}
+{% extends "base.html" %}
+{% block title %}Existed{%endblock title%}
+{% block content %}
+<div class = "container">
+	<div class="row">
+		<div class="col-sm-2"></div>
+		<div class="col-sm-8">
+			<div class="card">
+				<div class="card-header">
+					<strong>New short url</strong>
+				</div>
+				<div class="card-body">
+					<p>{{obj.longurl}}</p>
+					<p><a href="{% url 'directing' obj.shorturl %}">{{obj.shorturl}}</a></p>
+					<button class="btn btn-default"><a href="{% url 'home' %}">New Url</a></button>
+		       </div>
+			</div>
+	   </div>
+    </div>
+</div>
+{% endblock content %}

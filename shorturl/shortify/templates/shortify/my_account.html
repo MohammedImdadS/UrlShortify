@@ -1,0 +1,8 @@
+{% extends 'base.html' %}
+{% block content %}
+<h1>List of Longurls and there Shorturls</h1>
+{% for url in urllist %}
+<ol><li><strong>LongUrl:</strong>{{url.longurl}}
+<strong>ShortUrl:</strong><a href="{% url 'directing' url.shorturl %}">{{url.shorturl}}</a></li></ol>
+{% endfor %}
+{% endblock content %}
